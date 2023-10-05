@@ -20,7 +20,8 @@ def solve_rate(N):
 
 def conf_intv(N_i, B_i, n_samples=1000, conf_lim=0.95):
     '''
-    Description: for a bunch of X-ray observations at the time of radio bursts, this function computes the 95% credible region on rate, assuming there is a source at the time of each  observation governed by the same rate. 
+    Description: for a bunch of X-ray observations at the time of radio bursts, this function computes the 95% 
+    credible region on rate, assuming there is a source at the time of each  observation governed by the same rate. 
 
     Inputs:
     N_i: list of number of X-ray photons for each observation
@@ -30,7 +31,8 @@ def conf_intv(N_i, B_i, n_samples=1000, conf_lim=0.95):
     conf_lim: width of the credible region desired, default 0.95
 
     Outputs:
-    RLL, RUL: the pair of rates defining the boundary of the credible region desired (lower limit, upper limit on rate)
+    RLL, RUL: the pair of rates defining the boundary of the credible region desired (lower limit, upper limit on
+    rate)
 
     '''
     
@@ -60,7 +62,8 @@ def conf_intv(N_i, B_i, n_samples=1000, conf_lim=0.95):
     RLL_i = 0
     #if the most likely value is not 0
     if center_ind != 0:
-        #add the posterior value of test rates until you've found your lower limit, i.e., until you've hit a integral value of conf_lim/2, or, you hit a 0 rate
+        #add the posterior value of test rates until you've found your lower limit, i.e., until you've hit a 
+        #integral value of conf_lim/2, or, you hit a 0 rate
         while inc_conf < (conf_lim/2) and i <= (center_ind):
             i+= 1
             inc_conf += posterior_density[int(center_ind-i)]
@@ -68,7 +71,8 @@ def conf_intv(N_i, B_i, n_samples=1000, conf_lim=0.95):
     
         RLL = rates[max(int(center_ind-i),0)]
         RLL_i = max(int(center_ind-i),0)
-    #from the lower limit, which might be 0, add rates to include in the credible region until the integral hits conf_lim 
+    #from the lower limit, which might be 0, add rates to include in the credible region until the integral 
+    #hits conf_lim 
     i = 1 
     while inc_conf < (conf_lim):
         i+= 1
