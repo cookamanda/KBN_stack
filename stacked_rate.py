@@ -7,7 +7,7 @@ from scipy.stats import poisson, truncnorm, norm
 import math
 from scipy.optimize import newton
 
-def equation(lambda_, N, conf_lim = 0.95):
+def pois_rate_equation(lambda_, N, conf_lim = 0.95):
     result = 0
     for k in range(N + 1):
         result += (lambda_ ** k) * (math.exp(-lambda_)) / math.factorial(k)
@@ -15,7 +15,7 @@ def equation(lambda_, N, conf_lim = 0.95):
 
 def solve_rate(N):
     initial_guess = N+3*np.sqrt(N)  # You can start with an initial guess
-    rate_solution = newton(equation, initial_guess, args=(N,))
+    rate_solution = newton(pois_rate_equation, initial_guess, args=(N,))
     return rate_solution
 
 def conf_intv(N_i, B_i, n_samples=1000, conf_lim=0.95):
