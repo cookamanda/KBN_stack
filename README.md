@@ -14,20 +14,24 @@ where $\text{Pois}(k| \lambda)$ is the Poisson probability mass function of $k \
 ## Bayesian formalism for $\eta$ constraints from multiple observations
 
 Previously, we assume a single source rate and estsimate the posterior on that source rate combining information from multiple observations. If one expects that the X-ray fluence from the source should be proportional to the radio fluence, it is desirable to estimate the posterior on the X-ray to radio source fluence, $\eta$, assumed to be constant for all bursts. Again, we define $N_i$ as the number of X-ray photons at the time of each radio burst, $B_i$ is average background rate of X-ray photons at the time of each radio burst and $F_i$ is the calculated radio fluence, with associated error $\sigma_{F_i}$. What is the credible interval on $\eta$ for these multiple observations? In the following derivation, we use $N_i, B_i, F_i$ as shorthand for the more conventional general list $N_0, B_0, F_0, \ldots, N_n, B_n, F_n$ where $n$ is the total number of detected bursts. Starting from Bayes rule, we can write
+```math
 \begin{align}
     f_{N_i, B_i, F_i}(\eta) & = \frac{p(N_i, B_i,  F_i |\eta)p(\eta)}{C}
 \end{align}
+```
  where $C\in \mathbb{R}$ is some normalization constant. To compute the probability density of the observed counts, we must invoke an X-ray rate parameter for each observation, $S_i$, however this value is not known. Instead, we introduce $S_i$ in the following equation via the probability density identity $p(B) = \int_A p(A,B) d A$. 
- 
+ ```math
 \begin{align}
     p(N_i, B_i, F_i |\eta) & = \int_{S_i} p(N_i, B_i, F_i, S_i | \eta) d S_i \\ 
     & = \int_{S_i}p(N_i, B_i, F_i| S_i) p(S_i | \eta ) \dd S_i 
 \end{align}
-
+```
 thus, for $\mathcal{N}_0^{\infty}(\mu, \sigma)$ the $[0,\infty)$ truncated normal distribution centered at $\mu$ with standard deviation $\sigma$, (we introduce the truncation as negative source counts are not physical). 
+```math
 \begin{align}
     f_{N_i, B_i, F_i}(\eta) & = \frac{1}{C} p(\eta) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i, B_i,  F_i| \mathcal{S}_i) p(\mathcal{S}_i | \eta ) \dd \mathcal{S}_1\dd \mathcal{S}_2\ldots \dd \mathcal{S}_n\\
     & = \frac{1}{C} p(\eta)\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i) \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{(\text{Flux}/S)},  \frac{\eta}{\text{Flux}/S}\sigma_{F_i}\right) \dd \mathcal{S}_1\dd \mathcal{S}_2\ldots \dd \mathcal{S}_n\\
     & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) \dd \mathcal{S}_i
 \end{align}
+```
 As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst \cite{kbn} $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms \citep{1993Legac...3...21M} to convert 1 count/s to X-ray flux for the \nicer\, telescope, given the X-ray absorption \citep[$N_H = 1.42\times 10^{21} \text{cm}^{-2}$;][]{2016AA...594A.116H} along the line of sight.
