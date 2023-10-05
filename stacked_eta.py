@@ -4,6 +4,9 @@
 # last modified: 2023-10-05
 # =============================================================================
 
+
+#TODO: Prior is uniform right now --Amanda
+
 import numpy as np 
 from scipy.integrate import quad
 from scipy.stats import poisson, truncnorm 
