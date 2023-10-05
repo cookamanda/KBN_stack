@@ -7,10 +7,8 @@ Assume we want to stack the information from $n$ X-ray observations at the time 
  f(S| N_1,B_1, \ldots, N_{n}, B_n)  =\frac{P( N_1, B_1, \ldots, N_{n}, B_{n}|S)p(S)}{P(N_1, B_1, \ldots, N_n, B_n)}
 ```
 ```math
-\begin{align}
 f(S| N_1,B_1, \ldots, N_{n}, B_n)  & =\frac{P( N_1, B_1, \ldots, N_{n}, B_{n}|S)p(S)}{P(N_1, B_1, \ldots, N_n, B_n)}\\
    & = \frac{p(S)\prod_{i=1}^{n} \text{Pois}(N_i | \lambda = B_i + S)}{\int_0^\infty\prod_{i=1}^{n} \text{Pois}(N_i | \lambda = B_i + S) d S
-\end{align}
 ```
 where $\text{Pois}(k| \lambda)$ is the Poisson probability mass function of $k \in \mathbb{N}$ observed counts given Poisson rate $\lambda \in \mathbb{R}^+$. \cite{kbn} assume a uniform prior for all positive values. We use previous limits placed on the X-ray emission at the time of FRBs to set a conservative but still informative prior. Only during the \nicer\, observations do we have multiple radio bursts. Just one radio burst was detected during the XMM, observations, and hence we use the original method from \cite{kbn} to estimate the posterior on source rate. Since these data are independent, we can use the posterior on source count rate from the \xmm\, observations as our prior for the \nicer\, observations. In order to construct the 95\% credible interval from this equation, again following \cite{kbn}, we enforce that $S_{\text{max}}-S_{\text{min}}$ is minimized and the peak value of the posterior is included. 
 
