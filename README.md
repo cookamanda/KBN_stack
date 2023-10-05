@@ -23,15 +23,15 @@ Previously, we assume a single source rate and estsimate the posterior on that s
  ```math
 \begin{align}
     p(N_i, B_i, F_i |\eta) & = \int_{S_i} p(N_i, B_i, F_i, S_i | \eta) d S_i \\ 
-    & = \int_{S_i}p(N_i, B_i, F_i| S_i) p(S_i | \eta ) \dd S_i 
+    & = \int_{S_i}p(N_i, B_i, F_i| S_i) p(S_i | \eta )  d  S_i 
 \end{align}
 ```
 thus, for $\mathcal{N}_0^{\infty}(\mu, \sigma)$ the $[0,\infty)$ truncated normal distribution centered at $\mu$ with standard deviation $\sigma$, (we introduce the truncation as negative source counts are not physical). 
 ```math
 \begin{align}
-    f_{N_i, B_i, F_i}(\eta) & = \frac{1}{C} p(\eta) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i, B_i,  F_i| \mathcal{S}_i) p(\mathcal{S}_i | \eta ) \dd \mathcal{S}_1\dd \mathcal{S}_2\ldots \dd \mathcal{S}_n\\
-    & = \frac{1}{C} p(\eta)\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i) \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{(\text{Flux}/S)},  \frac{\eta}{\text{Flux}/S}\sigma_{F_i}\right) \dd \mathcal{S}_1\dd \mathcal{S}_2\ldots \dd \mathcal{S}_n\\
-    & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) \dd \mathcal{S}_i
+    f_{N_i, B_i, F_i}(\eta) & = \frac{1}{C} p(\eta) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i, B_i,  F_i| \mathcal{S}_i) p(\mathcal{S}_i | \eta ) d \mathcal{S}_1 d \mathcal{S}_2\ldots d \mathcal{S}_n\\
+    & = \frac{1}{C} p(\eta)\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i) \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{(\text{Flux}/S)},  \frac{\eta}{\text{Flux}/S}\sigma_{F_i}\right) d \mathcal{S}_1 d \mathcal{S}_2\ldots d \mathcal{S}_n\\
+    & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) d \mathcal{S}_i
 \end{align}
 ```
 As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst \cite{kbn} $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms \citep{1993Legac...3...21M} to convert 1 count/s to X-ray flux for the \nicer\, telescope, given the X-ray absorption \citep[$N_H = 1.42\times 10^{21} \text{cm}^{-2}$;][]{2016AA...594A.116H} along the line of sight.
