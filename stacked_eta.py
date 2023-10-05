@@ -52,10 +52,11 @@ def stacked_eta_log_posterior(eta, N_i, B_i, F_i, F_err_i, max_rate, F_2_S=3.799
                                                         F_2_S, max_rate))
     return np.add(np.log(prior(eta)), np.sum(log_integrals))
 
-def credible_region(stacked_eta_posterior, etas,  level= 0.997):
+def credible_region(stacked_eta_posterior, etas,  level= 0.997,
+                    return_indicies=False):
     #normalize
-    normed = np.divide(stacked_eta_posterior,
-                       np.sum(np.exp(stacked_eta_log_posterior)))
+    normed = np.divide(np.exp(stacked_eta_posterior),
+                       np.sum(np.exp(stacked_eta_posterior)))
     center_ind = np.argmax(normed)
     inc_conf = normed[int(center_ind)]
     i = 0 
@@ -71,6 +72,7 @@ def credible_region(stacked_eta_posterior, etas,  level= 0.997):
     
     
         RLL = etas[max(int(center_ind-i),0)]
+        RLL_i = max(int(center_ind-i),0)
     #from the lower limit, which might be 0, add rates to include in the 
     #credible region until the integral hits conf_lim 
     i = 1 
@@ -78,14 +80,22 @@ def credible_region(stacked_eta_posterior, etas,  level= 0.997):
         i+= 1
         inc_conf += normed[int(center_ind+i)]
     RUL = etas[int(center_ind+i)]
-    return RLL, RUL
+    RUL_i = int(center_ind+i)
+    if return_indicies:
+        return RLL, RUL, RLL_i, RUL_i
+    else:
+        return RLL, RUL
 
-def eta_credible_region(N_i, B_i, F_i, F_i_err, min_eta=10E3, max_eta=10E6, 
-                        F_2_S =  3.799E-12, nsamples=10000, level=0.997):
+def eta_credible_region(N_i, B_i, F_i, F_i_err, min_eta=1E2, max_eta=1E7, 
+                        F_2_S =  3.799E-12, nsamples=500, level=0.68,return_indicies = False):
     max_rate = solve_rate(max(N_i))
-    etas = np.logspace(np.log(min_eta), np.log(max_eta), nsamples)
-    log_posterior = [stacked_eta_log_posterior(eta, N_i, B_i, F_i, F_i_err,\
-                     max_rate, F_2_S) for eta in etas]
+    etas = np.logspace(np.log10(min_eta), np.log10(max_eta), nsamples)
+    log_posterior = np.zeros([nsamples])
+    for i, eta in enumerate(etas): 
+        #print(eta)
+        log_posterior[i] = stacked_eta_log_posterior(eta, N_i, B_i, F_i, F_i_err,\
+                     max_rate, F_2_S)
+        #print(log_posterior[i])
     RLL, RUL = credible_region(log_posterior, etas, level)                                                         
     return RLL, RUL
 
