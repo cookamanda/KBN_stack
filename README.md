@@ -1,7 +1,7 @@
 # KBN_stack
 
 ## Bayesian formalism for source rate constraints from multiple observations
-Assume we want to stack the information from $n$ X-ray observations at the time of radio bursts. Still using \cite{kbn} Bayesian formalism, but construct the posterior probability using bayes rule assuming $n$ observations of $N_i$ X-ray photons for $(i \in 1, \ldots n)$, and average background rates of $B_i$ for $(i \in 1, \ldots n)$, to estimate a rate $S$ for X-ray emission at the time of radio bursts. We assume that $S$ is constant for all radio bursts. Starting from Bayes rule
+Assume we want to stack the information from $n$ X-ray observations at the time of radio bursts. Still using [Kraft et al. (1991)]([https://ui.adsabs.harvard.edu/abs/1991ApJ...374..344K/abstract]) Bayesian formalism, but construct the posterior probability using bayes rule assuming $n$ observations of $N_i$ X-ray photons for $(i \in 1, \ldots n)$, and average background rates of $B_i$ for $(i \in 1, \ldots n)$, to estimate a rate $S$ for X-ray emission at the time of radio bursts. We assume that $S$ is constant for all radio bursts. Starting from Bayes rule
 
 ```math
 \begin{align}
@@ -9,7 +9,7 @@ Assume we want to stack the information from $n$ X-ray observations at the time 
  & = \frac{p(S) \Pi_{i=1}^{n} \text{Pois}(N_i | \lambda = B_i + S)}{\int_0^\infty\Pi_{i=1}^{n} \text{Pois}(N_i | \lambda = B_i + S) d S}
 \end{align}
 ```
-where $\text{Pois}(k| \lambda)$ is the Poisson probability mass function of $k \in \mathbb{N}$ observed counts given Poisson rate $\lambda \in \mathbb{R}^+$. \cite{kbn} assume a uniform prior for all positive values. We use previous limits placed on the X-ray emission at the time of FRBs to set a conservative but still informative prior. Only during the \nicer\, observations do we have multiple radio bursts. Just one radio burst was detected during the XMM, observations, and hence we use the original method from \cite{kbn} to estimate the posterior on source rate. Since these data are independent, we can use the posterior on source count rate from the \xmm\, observations as our prior for the \nicer\, observations. In order to construct the 95\% credible interval from this equation, again following \cite{kbn}, we enforce that $S_{\text{max}}-S_{\text{min}}$ is minimized and the peak value of the posterior is included. 
+where $\text{Pois}(k| \lambda)$ is the Poisson probability mass function of $k \in \mathbb{N}$ observed counts given Poisson rate $\lambda \in \mathbb{R}^+$. \cite{kbn} assume a uniform prior for all positive values. We use previous limits placed on the X-ray emission at the time of FRBs to set a conservative but still informative prior. Only during the \nicer\, observations do we have multiple radio bursts. Just one radio burst was detected during the XMM, observations, and hence we use the original method from [Kraft et al. (1991)]([https://ui.adsabs.harvard.edu/abs/1991ApJ...374..344K/abstract]) to estimate the posterior on source rate. Since these data are independent, we can use the posterior on source count rate from the \xmm\, observations as our prior for the \nicer\, observations. In order to construct the 95\% credible interval from this equation, again following \cite{kbn}, we enforce that $S_{\text{max}}-S_{\text{min}}$ is minimized and the peak value of the posterior is included. 
 
 ## Bayesian formalism for η constraints from multiple observations
 
@@ -34,4 +34,4 @@ thus, for $\mathcal{N}_0^{\infty}(\mu, \sigma)$ the $[0,\infty)$ truncated norma
     & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) d \mathcal{S}_i
 \end{align}
 ```
-As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst \cite{kbn} $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms \citep{1993Legac...3...21M} to convert 1 count/s to X-ray flux for the \nicer\, telescope, given the X-ray absorption \citep[$N_H = 1.42\times 10^{21} \text{cm}^{-2}$;][]{2016AA...594A.116H} along the line of sight.
+As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst [Kraft et al. (1991)]([https://ui.adsabs.harvard.edu/abs/1991ApJ...374..344K/abstract]) $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms \citep{1993Legac...3...21M} to convert 1 count/s to X-ray flux for the \nicer\, telescope, given the X-ray absorption \citep[$N_H = 1.42\times 10^{21} \text{cm}^{-2}$;][]{2016AA...594A.116H} along the line of sight.
