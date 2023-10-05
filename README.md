@@ -5,7 +5,7 @@ Assume we want to stack the information from $n$ X-ray observations at the time 
 
 
 \begin{align}
-f(S| N_1,B_1, \ldots, N_{n}, B_n)  &=\frac{ P( N_1, B_1, \ldots, N_{n}, B_{n}|S)p(S)  }{P(N_1, B_1, \ldots, N_n, B_n)}\\
+f(S| N_1,B_1, \ldots, N_{n}, B_n)  & =\frac{P( N_1, B_1, \ldots, N_{n}, B_{n}|S)p(S)}{P(N_1, B_1, \ldots, N_n, B_n)}\\
    & = \frac{p(S)\prod_{i=1}^{n} \text{Pois}(N_i | \lambda = B_i + S)}{\int_0^\infty\prod_{i=1}^{n} \text{Pois}(N_i | \lambda = B_i + S) d S
 \end{align}
 
@@ -17,11 +17,13 @@ Previously, we assume a single source rate and estsimate the posterior on that s
 \begin{align}
     f_{N_i, B_i, F_i}(\eta) & = \frac{p(N_i, B_i,  F_i |\eta)p(\eta)}{C}
 \end{align}
- where $C\in \mathbb{R}$ is some normalization constant. To compute the probability density of the observed counts, we must invoke an X-ray rate parameter for each observation, $S_i$, however this value is not known. Instead, we introduce $S_i$ in the following equation via the probability density identity $p(B) = \int_A p(A,B) \dd A$. 
+ where $C\in \mathbb{R}$ is some normalization constant. To compute the probability density of the observed counts, we must invoke an X-ray rate parameter for each observation, $S_i$, however this value is not known. Instead, we introduce $S_i$ in the following equation via the probability density identity $p(B) = \int_A p(A,B) d A$. 
+ 
 \begin{align}
-    p(N_i, B_i, F_i |\eta) & = \int_{S_i} p(N_i, B_i, F_i, S_i | \eta) \dd S_i \\ 
+    p(N_i, B_i, F_i |\eta) & = \int_{S_i} p(N_i, B_i, F_i, S_i | \eta) d S_i \\ 
     & = \int_{S_i}p(N_i, B_i, F_i| S_i) p(S_i | \eta ) \dd S_i 
 \end{align}
+
 thus, for $\mathcal{N}_0^{\infty}(\mu, \sigma)$ the $[0,\infty)$ truncated normal distribution centered at $\mu$ with standard deviation $\sigma$, (we introduce the truncation as negative source counts are not physical). 
 \begin{align}
     f_{N_i, B_i, F_i}(\eta) & = \frac{1}{C} p(\eta) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i, B_i,  F_i| \mathcal{S}_i) p(\mathcal{S}_i | \eta ) \dd \mathcal{S}_1\dd \mathcal{S}_2\ldots \dd \mathcal{S}_n\\
