@@ -30,8 +30,8 @@ thus, for $\mathcal{N}_0^{\infty}(\mu, \sigma)$ the $[0,\infty)$ truncated norma
 ```math
 \begin{align}
     f_{N_i, B_i, F_i}(\eta) & = \frac{1}{C} p(\eta) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i, B_i,  F_i| \mathcal{S}_i) p(\mathcal{S}_i | \eta ) d \mathcal{S}_1 d \mathcal{S}_2\ldots d \mathcal{S}_n\\
-    & = \frac{1}{C} p(\eta)\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i) \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{(\text{Flux}/S)},  \frac{\eta}{\text{Flux}/S}\sigma_{F_i}\right) d \mathcal{S}_1 d \mathcal{S}_2\ldots d \mathcal{S}_n\\
-    & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) d \mathcal{S}_i
+    & = \frac{1}{C} p(\eta)\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i| \lambda = \mathcal{S}_i+ B_i) \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{(\text{Flux}/S)},  \frac{\eta}{\text{Flux}/S}\sigma_{F_i}\right) d \mathcal{S}_1 d \mathcal{S}_2\ldots d \mathcal{S}_n\\
+    & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i| \lambda = \mathcal{S}_i+ B_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) d \mathcal{S}_i
 \end{align}
 ```
 As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst [Kraft et al. (1991)](https://ui.adsabs.harvard.edu/abs/1991ApJ...374..344K/abstract) $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms [Mukai 1993](https://ui.adsabs.harvard.edu/abs/1993Legac...3...21M)
