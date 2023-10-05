@@ -3,6 +3,7 @@
 ## Bayesian formalism for source rate constraints from multiple observations
 Assume we want to stack the information from $n$ X-ray observations at the time of radio bursts. Still using \cite{kbn} Bayesian formalism, but construct the posterior probability using bayes rule assuming $n$ observations of $N_i$ X-ray photons for $(i \in 1, \ldots n)$, and average background rates of $B_i$ for $(i \in 1, \ldots n)$, to estimate a rate $S$ for X-ray emission at the time of radio bursts. We assume that $S$ is constant for all radio bursts. Starting from Bayes rule
 
+\[ f(S| N_1,B_1, \ldots, N_{n}, B_n)  =\frac{P( N_1, B_1, \ldots, N_{n}, B_{n}|S)p(S)}{P(N_1, B_1, \ldots, N_n, B_n)}\]
 
 \begin{align}
 f(S| N_1,B_1, \ldots, N_{n}, B_n)  & =\frac{P( N_1, B_1, \ldots, N_{n}, B_{n}|S)p(S)}{P(N_1, B_1, \ldots, N_n, B_n)}\\
