@@ -34,4 +34,5 @@ thus, for $\mathcal{N}_0^{\infty}(\mu, \sigma)$ the $[0,\infty)$ truncated norma
     & = \frac{1}{C} p(\eta) \prod_i \int_{S_i} \text{Pois}(N_i, B_i, F_i| \lambda = \mathcal{S}_i)  \hspace{1.5mm} \mathcal{N}_0^{\infty}\left(\frac{\eta F_\text{i}}{\text{Flux}/S}, \frac{\eta}{\text{Flux}/S} \sigma_{F_i}\right) d \mathcal{S}_i
 \end{align}
 ```
-As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst [Kraft et al. (1991)](https://ui.adsabs.harvard.edu/abs/1991ApJ...374..344K/abstract) $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms \citep{1993Legac...3...21M} to convert 1 count/s to X-ray flux for the \nicer\, telescope, given the X-ray absorption \citep[$N_H = 1.42\times 10^{21} \text{cm}^{-2}$;][]{2016AA...594A.116H} along the line of sight.
+As above, we will use the the $\eta$ prior implied from the \xmm\, radio burst [Kraft et al. (1991)](https://ui.adsabs.harvard.edu/abs/1991ApJ...374..344K/abstract) $S$ posterior. In order to compute $\text{Flux}/S$, we will use pimms [Mukai 1993](https://ui.adsabs.harvard.edu/abs/1993Legac...3...21M)
+ to convert 1 count/s to X-ray flux for the \nicer\, telescope, given the X-ray absorption ($N_H = 1.42\times 10^{21} \text{cm}^{-2}$;[HI4PI Collaboration 2016](https://ui.adsabs.harvard.edu/abs/2016A&A...594A.116H)) along the line of sight.
