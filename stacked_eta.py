@@ -1,14 +1,11 @@
 # =============================================================================
 # stacked_eta.py, Written by Amanda M. Cook 
 # created: 2023-10-05
-# last modified: 2023-10-24
+# last modified: 2023-10-25
 # =============================================================================
 
 
 #TODO: Prior is uniform right now --Amanda
-
-import mpmath as mp
-import numpy as np
 
 import mpmath as mp
 import numpy as np
@@ -46,9 +43,8 @@ def stacked_eta_log_posterior(eta, N_i, B_i, F_i, F_err_i, F_2_S=7.631465e-12):
 
 def credible_region(stacked_eta_posterior, etas,  level= 0.997,
                     return_indicies=False):
-    #normalize
     exponentiated = [mp.exp(float(x)) for x in  stacked_eta_posterior] 
-    normed = [mp.fdiv(mp.exp(float(x)),mp.fsum(exponentiated)) for x in exponentiated]
+    normed = [mp.fdiv(float(x),mp.fsum(exponentiated)) for x in exponentiated]
     RUL_i = np.argmin(np.abs(np.subtract(np.cumsum(normed), 1-((1-level)/2))))
     RLL_i = np.argmin(np.abs(np.subtract(np.cumsum(normed), ((1-level)/2))))
     i = 0 
@@ -66,7 +62,6 @@ def eta_credible_region(N_i, B_i, F_i, F_i_err, max_eta=1E7,
     etas_edges = np.logspace(0, np.log10(max_eta), int(nsamples))
     bin_widths = np.subtract(etas_edges[1:], etas_edges[:-1])
     log_posterior = mp.zeros(1,int(nsamples)-1)
-    print('post_calc')
     for i, eta in tqdm(enumerate(etas)): 
         #print(eta)
         log_posterior[0,i] = mp.fadd(stacked_eta_log_posterior(eta, N_i, B_i, F_i, F_i_err,\
