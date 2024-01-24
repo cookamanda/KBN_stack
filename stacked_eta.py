@@ -29,8 +29,8 @@ def integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err):
         return np.sum(result)
 
 def custom_integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err):
-    test_s = np.logspace(-5,2,1000)
-    bin_widths = np.logspace(-5,2,1001)
+    test_s = np.logspace(-10,2,2000)
+    bin_widths = np.logspace(-10,2,2001)
     bin_edges = bin_widths[1:] - bin_widths[:-1]
     if isinstance(N_i, (int, float)):
         result = np.sum(np.multiply(S_i_integrand(test_s, N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err), bin_edges))
@@ -41,7 +41,7 @@ def custom_integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err):
             result[i] =  np.sum(np.multiply(S_i_integrand(test_s, N_i[i], B_i[i], a_TNorm[i], eta, F_i[i], F_2_S[i], F_i_err[i]), bin_edges))
         return np.sum(result)   
     
-def eta_posterior(etas, N_i, B_i, F_i, F_i_err, F_2_S, prior=None):
+def eta_posterior(etas, binsizes, N_i, B_i, F_i, F_i_err, F_2_S, prior=None):
     '''
     Prior, default is flat, same length as etas
     '''
@@ -52,9 +52,7 @@ def eta_posterior(etas, N_i, B_i, F_i, F_i_err, F_2_S, prior=None):
         a_TNorm = (0 - eta*F_i/F_2_S) / (F_i_err*eta/F_2_S)
         int_result = custom_integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err)
         posterior[i] = int_result*prior[i]
-    eta_edges = np.logspace(np.log10(min(etas)),np.log10(max(etas)), len(etas)+1)
-    eta_binsizes = eta_edges[1:] - eta_edges[:-1]    
-    norm = np.sum(np.multiply(posterior,eta_binsizes))
+    norm = np.sum(np.multiply(posterior,binsizes))
     return np.divide(posterior,norm)
 
 
@@ -67,4 +65,5 @@ def credible_region(posterior, etas, binsizes, level, return_tolerance=False):
         return eta_lower, eta_upper, tolerance
     else:
         return eta_lower, eta_upper
+        
             
