@@ -29,25 +29,37 @@ def integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err):
         return np.sum(result)
 
 def custom_integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err):
-    test_s = np.logspace(-10,2,2000)
-    bin_widths = np.logspace(-10,2,2001)
-    bin_edges = bin_widths[1:] - bin_widths[:-1]
+    implied_si = eta*F_i/F_2_S
     if isinstance(N_i, (int, float)):
+        test_s = np.logspace(np.log10(implied_si)-5,
+                             np.log10(implied_si)+5,
+                             5000)
+        bin_widths = np.logspace(np.log10(implied_si)-5,
+                             np.log10(implied_si)+5,
+                             5001)
+        bin_edges = bin_widths[1:] - bin_widths[:-1]
         result = np.sum(np.multiply(S_i_integrand(test_s, N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err), bin_edges))
         return result
     else:
+        test_s = np.logspace(np.log10(np.min(implied_si))-5,
+                             np.log10(np.max(implied_si))+5,
+                             5000)
+        bin_widths = np.logspace(np.log10(np.min(implied_si))-5,
+                             np.log10(np.max(implied_si))+5,
+                             5001)
+        bin_edges = bin_widths[1:] - bin_widths[:-1]
         result = np.zeros(len(N_i))
         for i in range(len(N_i)):
             result[i] =  np.sum(np.multiply(S_i_integrand(test_s, N_i[i], B_i[i], a_TNorm[i], eta, F_i[i], F_2_S[i], F_i_err[i]), bin_edges))
-        return np.sum(result)   
-    
+        return np.prod(result)   
+
 def eta_posterior(etas, binsizes, N_i, B_i, F_i, F_i_err, F_2_S, prior=None):
     '''
     Prior, default is flat, same length as etas
     '''
     posterior = np.zeros(len(etas))
     if prior is None:
-        prior = np.linspace(1,1,len(etas))
+        prior = np.linspace(1.0/(max(etas)-min(etas)),1.0/(max(etas)-min(etas)),len(etas))
     for i, eta in tqdm(enumerate(etas)):
         a_TNorm = (0 - eta*F_i/F_2_S) / (F_i_err*eta/F_2_S)
         int_result = custom_integrate_S_i_function(N_i, B_i, a_TNorm, eta, F_i, F_2_S, F_i_err)
@@ -65,5 +77,7 @@ def credible_region(posterior, etas, binsizes, level, return_tolerance=False):
         return eta_lower, eta_upper, tolerance
     else:
         return eta_lower, eta_upper
+
+
         
             
