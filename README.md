@@ -34,16 +34,16 @@ Starting again from Bayes rule, we can write the posterior $f(\eta_{	ext{\,x/r}}
  where $C\in \mathbb{R}$ is some normalization constant. To compute the probability density of the observed counts, we must invoke an X-ray rate parameter for each observation, $S_i$, however this value is not known. Instead, we assume a hierarchical Bayesian model, introducing $S_i$ as a random variable in the following equation using the chain rule of probability through the identity $p(A|B) = \int_C p(A,C|B) d C = \int_C p(C|B) p(A|B,C)d C$ for random variables $A,B,C$:
 ```math
  \begin{align}
- f(\eta_{	ext{\,x/r}}) & = \frac{1}{C} p(\eta_{	ext{\,x/r}}) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i | S_i, \eta_{	ext{\,x/r}}) p(S_i | \eta_{	ext{\,x/r}}) d S_1d S_2\ldots d S_n\\
-    & \propto p(\eta_{	ext{\,x/r}}) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i | S_i,\eta_{	ext{\,x/r}}) p(S_i | \eta_{	ext{\,x/r}}) d S_1d S_2\ldots d S_n\\
-    & \propto p(\eta_{	ext{\,x/r}})\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i | \lambda_i = S_i+B_i) \hspace{1.5mm} \mathcal{N}^\infty_0  \left( \frac{\eta_{\text{\,x/r}} F_{\text{radio}, i}}{(\text{Flux/S})} , \frac{\eta_{\text{\,x/r}} \sigma_{F_{\text{radio}, i}}}{(\text{Flux/S})} \right)d S_1d S_2\ldots d S_n\\
-    & \propto p(\eta_{	ext{\,x/r}}) \prod_i \int^\infty_{0} 
+ f(\eta_{\text{\,x/r}}) & = \frac{1}{C} p(\eta_{\text{\,x/r}}) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i | S_i, \eta_{\text{\,x/r}}) p(S_i | \eta_{\text{\,x/r}}) d S_1d S_2\ldots d S_n\\
+    & \propto p(\eta_{\text{\,x/r}}) \int_{S_1}\int_{S_2} \ldots \int_{S_n} p(N_i | S_i,\eta_{	ext{\,x/r}}) p(S_i | \eta_{	ext{\,x/r}}) d S_1d S_2\ldots d S_n\\
+    & \propto p(\eta_{\text{\,x/r}})\int_{S_1}\int_{S_2} \ldots \int_{S_n} \prod_i \text{Pois}(N_i | \lambda_i = S_i+B_i) \hspace{1.5mm} \mathcal{N}^\infty_0  \left( \frac{\eta_{\text{\,x/r}} F_{\text{radio}, i}}{(\text{Flux/S})} , \frac{\eta_{\text{\,x/r}} \sigma_{F_{\text{radio}, i}}}{(\text{Flux/S})} \right)d S_1d S_2\ldots d S_n\\
+    & \propto p(\eta_{\text{\,x/r}}) \prod_i \int^\infty_{0} 
       \hspace{1.5mm} 
-      \frac{(\text{Flux/S})(B_i + S_i)^{N_i}}{ \sqrt{2\pi}\eta_{\text{\,x/r}}\sigma_{F_{\text{radio}, i}} (N_i!)} \exp[-\left(B_i + S_i +\frac{(\text{Flux/S})^2\left(S_i - \frac{\eta_{\text{\,x/r}}F_{\text{radio}, i}}{(\text{Flux/S})}\right)^2}{2\eta_{	ext{\,x/r}}^2 \sigma^2_{F_{\text{radio}, i}}}\right)]
+      \frac{(\text{Flux/S})(B_i + S_i)^{N_i}}{ \sqrt{2\pi}\eta_{\text{\,x/r}}\sigma_{F_{\text{radio}, i}} (N_i!)} \exp[-\left(B_i + S_i +\frac{(\text{Flux/S})^2\left(S_i - \frac{\eta_{\text{\,x/r}}F_{\text{radio}, i}}{(\text{Flux/S})}\right)^2}{2\eta_{\text{i \,x/r}}^2 \sigma^2_{F_{\text{radio}, i}}}\right)]
  d S_i\\
      & \propto p(\eta_{\text{\,x/r}}) \exp(-\sum_{i=1}^n  B_i) \prod_{i=1}^{n} \int^\infty_{0} 
       \hspace{1.5mm} 
-      \frac{(\text{Flux/S})(B_i + S_i)^{N_i}}{ \sqrt{2\pi}\eta_{	ext{\,x/r}} \sigma_{F_{\text{radio}, i}} (N_i!)} \exp[-\left( S_i +\frac{(\text{Flux/S})^2\left(S_i - \frac{\eta_{\text{\,x/r}} F_{\text{radio}, i}}{(\text{Flux/S})}\right)^2}{2\eta_{\text{\,x/r}}^2 \sigma^2_{F_{\text{radio}, i}}}\right)]
+      \frac{(\text{Flux/S})(B_i + S_i)^{N_i}}{ \sqrt{2\pi}\eta_{	ext{\,x/r}} \sigma_{F_{\text{radio}, i}} (N_i!)} \exp[-\left( S_i +\frac{(\text{Flux/S})^2\left(S_i - \frac{\eta_{\text{\,x/r}} F_{\text{radio}, i}}{(\text{Flux/S})}\right)^2}{2\eta_{\text{i,x/r}}^2 \sigma^2_{F_{\text{radio}, i}}}\right)]
  d S_i\\
  & \propto p(\eta_{	ext{\,x/r}})  \prod_{i=1}^{n} \int^\infty_{0} 
       \hspace{1.5mm} 
